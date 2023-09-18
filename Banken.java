@@ -37,7 +37,7 @@ public class Banken {
             }
             else{
                 System.out.println("Du kan enbart välja mellan 1,2,3 och 4");
-                input.nextLine();
+                input.next();
             }
 
         }
