@@ -18,9 +18,10 @@ public class Banken {
         System.out.println("Välkommen till banken!");
         while(run){
             System.out.println("[Alternativ 1-4] 1.Se saldo 2.Sätt in pengar 3.Ta ut pengar 4.Avsluta");
-            int choice = input.nextInt();
+            if(hasNextIntCheck(input)){
+                int choice = input.nextInt();
 
-            switch(choice){
+                switch(choice){
 
                 case 1:
                 System.out.println("Ditt saldo är " + saldo + "kr");
@@ -46,12 +47,27 @@ public class Banken {
                 case 4:
                 run = false;
                 break;
+
+                default:
+                System.out.println("Du kan enbart välja mellan 1,2,3 och 4");
                 
             }
-
-
+            }
+            else{
+                System.out.println("Du kan enbart välja mellan 1,2,3 och 4");
+                input.nextLine();
+            }
 
         }
         
+    }
+
+    public static boolean hasNextIntCheck(Scanner choiceInput){
+        if(choiceInput.hasNextInt()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
