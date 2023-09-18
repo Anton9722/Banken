@@ -29,27 +29,39 @@ public class Banken {
 
                 case 2:
                 System.out.println("Hur mycket vill du sätta in?");
-                int deposit = input.nextInt();
-                saldo += deposit;
+                if(hasNextIntCheck(input)){
+                    int deposit = input.nextInt();
+                    saldo += deposit;
+                }
+                else{
+                    System.out.println("Oj! nu skrev du inte en siffra");
+                    input.nextLine();
+                }
+                input.nextLine();
                 break;
 
                 case 3:
                 System.out.println("Hur mycket vill du ta ut?");
-                int withdrawal = input.nextInt();
-                if(saldo - withdrawal < 0){
-                    System.out.println("Du kan inte ta ut mer pengar än du har! " + "du har " + saldo + "kr på kontot men försökte ta ut " + withdrawal + "kr");
+                if(hasNextIntCheck(input)){
+                    int withdrawal = input.nextInt();
+                    if(saldo - withdrawal < 0){
+                        System.out.println("Du kan inte ta ut mer pengar än du har! du har " + saldo + "kr på kontot men försökte ta ut " + withdrawal + "kr");
+                    }
+                    else{
+                        saldo -=withdrawal;
+                    }
                 }
                 else{
-                    saldo -= withdrawal;
+                    System.out.println("Oj! nu skrev du inte en siffra");
+                    input.nextLine();
+                    
                 }
+                input.nextLine();
                 break;
 
                 case 4:
                 run = false;
                 break;
-
-                default:
-                System.out.println("Du kan enbart välja mellan 1,2,3 och 4");
                 
             }
             }
