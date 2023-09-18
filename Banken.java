@@ -4,11 +4,6 @@ public class Banken {
     
     public static void main(String[] args) {
 
-        //1.Se Saldo
-        //2.Sätt in pengar
-        //3.Ta ut pengar
-        //4.Avsluta
-
         Scanner input = new Scanner(System.in);
 
         boolean run = true;
@@ -24,43 +19,18 @@ public class Banken {
                 switch(choice){
 
                 case 1:
-                System.out.println("Ditt saldo är " + saldo + "kr");
+                System.out.println(showAmount(saldo));
                 break;
 
                 case 2:
-                System.out.println("Hur mycket vill du sätta in?");
-                if(hasNextIntCheck(input)){
-                    int deposit = input.nextInt();
-                    saldo += deposit;
-                }
-                else{
-                    System.out.println("Oj! nu skrev du inte en siffra");
-                    input.nextLine();
-                }
-                input.nextLine();
+                saldo = depositAmount(saldo, input);
                 break;
 
                 case 3:
-                System.out.println("Hur mycket vill du ta ut?");
-                if(hasNextIntCheck(input)){
-                    int withdrawal = input.nextInt();
-                    if(saldo - withdrawal < 0){
-                        System.out.println("Du kan inte ta ut mer pengar än du har! du har " + saldo + "kr på kontot men försökte ta ut " + withdrawal + "kr");
-                    }
-                    else{
-                        saldo -=withdrawal;
-                    }
-                }
-                else{
-                    System.out.println("Oj! nu skrev du inte en siffra");
-                    input.nextLine();
-                    
-                }
-                input.nextLine();
+                saldo = withdrawalAmount(saldo, input);
                 break;
-
                 case 4:
-                run = false;
+                run = turnOff(run);
                 break;
                 
             }
@@ -81,5 +51,51 @@ public class Banken {
         else{
             return false;
         }
+    }
+
+    public static String showAmount (int saldo){
+        String saldoReturnToUser = "Ditt saldo är " + saldo + "kr";
+        return saldoReturnToUser;
+    }
+    public static int depositAmount(int saldo, Scanner input){
+        System.out.println("Hur mycket vill du sätta in?");
+                if(hasNextIntCheck(input)){
+                    int deposit = input.nextInt();
+                    int saldoReturn = saldo += deposit;
+                    return saldoReturn;
+                }
+                else{
+                    System.out.println("Oj! nu skrev du inte en siffra");
+                    input.nextLine();
+                    
+                }
+                input.nextLine();
+                return 0;
+    }
+
+    public static int withdrawalAmount (int saldo, Scanner input){
+        System.out.println("Hur mycket vill du ta ut?");
+                if(hasNextIntCheck(input)){
+                    int withdrawal = input.nextInt();
+                    if(saldo - withdrawal < 0){
+                        System.out.println("Du kan inte ta ut mer pengar än du har! du har " + saldo + "kr på kontot men försökte ta ut " + withdrawal + "kr");
+                    }
+                    else{
+                        saldo -=withdrawal;
+                        return saldo;
+                    }
+                }
+                else{
+                    System.out.println("Oj! nu skrev du inte en siffra");
+                    input.nextLine();
+                    
+                }
+                input.nextLine();
+                return saldo;
+    }
+
+    public static boolean turnOff (boolean run){
+        run = false;
+        return run;
     }
 }
